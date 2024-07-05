@@ -14,7 +14,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.12"
-cyclopts = "^2.7.1"
+cyclopts = "^2.9.3"
 loguru = "^0.7.2"
 httpx = "^0.27.0"
 
