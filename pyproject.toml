@@ -26,7 +26,7 @@ easybrake = "easybrake.cli:app"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "*"
-pytest = "^8.2.2"
+pytest = "^8.3.1"
 pre-commit = "^3.7.1"
 
 [build-system]
