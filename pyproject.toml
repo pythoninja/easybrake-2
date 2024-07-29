@@ -27,7 +27,7 @@ easybrake = "easybrake.cli:app"
 [tool.poetry.group.dev.dependencies]
 ruff = "*"
 pytest = "^8.2.2"
-pre-commit = "^3.7.1"
+pre-commit = "^3.8.0"
 
 [build-system]
 requires = ["poetry-core"]
