@@ -74,13 +74,13 @@ files = [
 
 [[package]]
 name = "cyclopts"
-version = "2.9.7"
+version = "2.9.9"
 description = ""
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "cyclopts-2.9.7-py3-none-any.whl", hash = "sha256:315cd453c32f166421ba38da341dc7a52a56009643f361552bcc39e68aa487b0"},
-    {file = "cyclopts-2.9.7.tar.gz", hash = "sha256:b0ef1bde722c4f5dc8c83653c872f82775a6019e2ecedad77306f823f0b76f7c"},
+    {file = "cyclopts-2.9.9-py3-none-any.whl", hash = "sha256:d0ce956c70f3070e5bc16824ecb5ebba155be45ef4aadbb78ac4753dd99367e3"},
+    {file = "cyclopts-2.9.9.tar.gz", hash = "sha256:11d7bb59be253329ff49a1b9a634676c7ae708605d4975090783b99d081c1a0b"},
 ]
 
 [package.dependencies]
@@ -591,4 +591,4 @@ dev = ["black (>=19.3b0)", "pytest (>=4.6.2)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "b86a88190c7f198db0178cb0f7777b63521a8042dc74e2a5d1c8b33b04293295"
+content-hash = "39df7bcf9fea6d5f50f03d75dfe761a0ceee51150a0af1ae61654c7bc495cd5f"
