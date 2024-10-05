@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from easybrake.dtos.movie import MovieType
-from easybrake.dtos.preset import Preset
+from easybrake.models.movie import MovieType
+from easybrake.models.preset import Preset
 from easybrake.utils.named_type import CommandsAndDirectories, Commands, Directories, Movies
 
 
@@ -14,7 +14,7 @@ class CommandGenerator:
 
     def get(self) -> CommandsAndDirectories:
         commands: Commands = []
-        directories: Directories = []
+        dirs: Directories = []
 
         for movie in self.movies:
             title = movie.title
@@ -51,6 +51,6 @@ class CommandGenerator:
                 )
             )
 
-            directories.append(output_file.parent)
+            dirs.append(output_file.parent)
 
-        return commands, directories
+        return commands, dirs
