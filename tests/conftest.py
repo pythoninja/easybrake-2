@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from easybrake.dtos.preset import Preset
+from easybrake.models.preset import Preset
 
 
 @pytest.fixture(scope="module")

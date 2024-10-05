@@ -5,7 +5,7 @@ from pathlib import Path
 
 from loguru import logger
 
-from easybrake.dtos.preset import Preset
+from easybrake.models.preset import Preset
 from easybrake.utils.httpclient import HttpClient
 from easybrake.utils.url import URLUtils
 from easybrake.enums.location import LocationType
@@ -22,13 +22,13 @@ class PresetConverter:
         location_type = URLUtils.get_location_type(self.preset_location)
 
         match location_type:
-            case LocationType.DISK:
+            case LocationType.LOCAL:
                 return self.__load_from_disk()
             case LocationType.URL:
                 return self.__load_from_url()
 
     def __load_from_disk(self) -> PresetJSON:
-        logger.info("Preset is on a disk: {}", self.preset_location)
+        logger.info("Preset is on a local disk: {}", self.preset_location)
         logger.info("Reading it...")
         self.full_preset_path = Path(self.preset_location)
 
@@ -54,14 +54,14 @@ class PresetConverter:
             with self.full_preset_path.open(encoding="UTF-8") as f:
                 return json.load(f)
         except (FileNotFoundError, json.JSONDecodeError) as e:
-            self.__handle_json_exceptions(e)
+            self.__handle_json_error(e)
 
-    def __handle_json_exceptions(self, exception: FileNotFoundError | json.JSONDecodeError) -> None:
-        if isinstance(exception, FileNotFoundError):
-            logger.error(f"File {self.preset_location} does not exist.")
-
-        if isinstance(exception, json.JSONDecodeError):
-            logger.error(f"File {self.preset_location} is not a valid JSON.")
+    def __handle_json_error(self, error: FileNotFoundError | json.JSONDecodeError) -> None:
+        match error:
+            case FileNotFoundError():
+                logger.error(f"File {self.preset_location} does not exist.")
+            case json.JSONDecodeError():
+                logger.error(f"File {self.preset_location} is not a valid JSON.")
 
         sys.exit(1)
 
@@ -72,7 +72,7 @@ class PresetConverter:
             logger.error("Invalid JSON structure: Missing {} key.", property_name)
             sys.exit(1)
 
-    def get(self) -> Preset:
+    def get_preset(self) -> Preset:
         return Preset(
             name=self.__get_preset_property("PresetName"),
             picture_width=self.__get_preset_property("PictureWidth"),

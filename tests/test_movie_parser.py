@@ -9,7 +9,7 @@ from tests.utils.helpers import get_input
 @pytest.mark.parametrize("test_input", get_input(_for="year_ok"))
 def test_year_parsing_success(preset_fixture, test_input):
     movie_converter = FileMovieConverter(preset_fixture, test_input)
-    movies = movie_converter.get()
+    movies = movie_converter.get_movies()
 
     assert movies[0].year is not None
     assert movies[0].year is not FileMovieConverter.UNKNOWN_YEAR
@@ -19,7 +19,7 @@ def test_year_parsing_success(preset_fixture, test_input):
 @pytest.mark.parametrize("test_input", get_input(_for="year_fail"))
 def test_year_parsing_unsuccess(preset_fixture, test_input):
     movie_converter = FileMovieConverter(preset_fixture, test_input)
-    movies = movie_converter.get()
+    movies = movie_converter.get_movies()
 
     assert movies[0].year is not None
     assert movies[0].year == FileMovieConverter.UNKNOWN_YEAR
@@ -28,7 +28,7 @@ def test_year_parsing_unsuccess(preset_fixture, test_input):
 @pytest.mark.parametrize("test_input", get_input(_for="quality_ok"))
 def test_quality_parsing_success(preset_fixture, test_input):
     movie_converter = FileMovieConverter(preset_fixture, test_input)
-    movies = movie_converter.get()
+    movies = movie_converter.get_movies()
 
     assert movies[0].quality is not None
     assert movies[0].quality is not FileMovieConverter.UNKNOWN_QUALITY
@@ -37,7 +37,7 @@ def test_quality_parsing_success(preset_fixture, test_input):
 @pytest.mark.parametrize("test_input", get_input(_for="quality_fail"))
 def test_quality_parsing_unsuccess(preset_fixture, test_input):
     movie_converter = FileMovieConverter(preset_fixture, test_input)
-    movies = movie_converter.get()
+    movies = movie_converter.get_movies()
 
     assert movies[0].quality is not None
     assert movies[0].quality is FileMovieConverter.UNKNOWN_QUALITY
@@ -48,7 +48,7 @@ def test_quality_parsing_unsuccess(preset_fixture, test_input):
 @pytest.mark.parametrize("test_input", get_input(_for="title_expected_fail"))
 def test_title_expected_fail(preset_fixture, test_input):
     movie_converter = FileMovieConverter(preset_fixture, test_input)
-    movies = movie_converter.get()
+    movies = movie_converter.get_movies()
 
     assert movies[0].title is not None
     assert movies[0].title != FileMovieConverter.UNKNOWN_TITLE

@@ -3,8 +3,8 @@ from pathlib import Path
 
 from loguru import logger
 
-from easybrake.dtos.movie import Movie, MovieType
-from easybrake.dtos.preset import Preset
+from easybrake.models.movie import Movie, MovieType
+from easybrake.models.preset import Preset
 from easybrake.utils.named_type import Movies, ShowSeasonEpisodeOrNone
 
 
@@ -22,8 +22,8 @@ class FileMovieConverter:
         self.preset = preset
         self.candidates = candidates
 
-    def get(self) -> Movies:
-        movies = []
+    def get_movies(self) -> Movies:
+        movies: Movies = []
 
         for candidate in self.candidates:
             year: str = self.__extract_info(self.RE_YEAR_PATTERN, candidate.name)
@@ -34,14 +34,7 @@ class FileMovieConverter:
 
             logger.info("Extracting info from file: {}", candidate.name)
 
-            if quality:
-                if int(quality[:-1]) < self.preset.picture_height:
-                    final_quality = quality
-                else:
-                    final_quality = f"{self.preset.picture_height}p"
-            else:
-                final_quality = self.UNKNOWN_QUALITY
-
+            final_quality = self.__calculate_final_quality(quality)
             final_title = self.__normalize_title(title) if title else self.UNKNOWN_TITLE
             movie_type = MovieType.SHOW if show else MovieType.FILM
 
@@ -86,3 +79,12 @@ class FileMovieConverter:
                 title = title.replace(symbol, " ")
 
         return title
+
+    def __calculate_final_quality(self, quality: str) -> str:
+        if quality:
+            if int(quality[:-1]) < self.preset.picture_height:
+                return quality
+            else:
+                return f"{self.preset.picture_height}p"
+        else:
+            return self.UNKNOWN_QUALITY
