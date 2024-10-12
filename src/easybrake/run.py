@@ -6,7 +6,7 @@ from loguru import logger
 from easybrake.resolver import DirectoryResolver
 from easybrake.converters.to_movie import FileMovieConverter
 from easybrake.converters.to_preset import PresetConverter
-from easybrake.finder import VideoFinder
+from easybrake.finder import MediaFinder
 from easybrake.generator import CommandGenerator
 from easybrake.utils.named_type import Directories, Commands, Movies
 
@@ -20,8 +20,8 @@ def runner(input_dir: Path, output_dir: Path, preset_location: str) -> None:
     logger.info("Input directory: {}", input_dir)
     logger.info("Output directory: {}", output_dir)
 
-    finder = VideoFinder(input_dir=input_dir)
-    video_files: list[Path] = finder.find()
+    finder = MediaFinder(input_dir=input_dir)
+    video_files: list[Path] = finder.find_videos()
 
     if not video_files:
         logger.error(f"No video files found at selected directory: {input_dir}")
