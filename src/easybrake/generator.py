@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from easybrake.models.movie import MovieType
+from easybrake.models.movie import MediaType
 from easybrake.models.preset import Preset
 from easybrake.utils.named_type import CommandsAndDirectories, Commands, Directories, Movies
 
@@ -23,7 +23,7 @@ class CommandGenerator:
             episode = movie.episode
             final_quality = movie.final_quality
 
-            if movie.type == MovieType.SHOW:
+            if movie.type == MediaType.SHOW:
                 output_file = Path(
                     f"{self.output_dir}/{title}/Season {season[1:]}/{title}.{season}{episode}.{final_quality}.mp4"
                 )

@@ -3,7 +3,7 @@ from pathlib import Path
 
 from loguru import logger
 
-from easybrake.models.movie import Movie, MovieType
+from easybrake.models.movie import Movie, MediaType
 from easybrake.models.preset import Preset
 from easybrake.utils.named_type import Movies, ShowSeasonEpisodeOrNone
 
@@ -36,7 +36,7 @@ class FileMovieConverter:
 
             final_quality = self.__calculate_final_quality(quality)
             final_title = self.__normalize_title(title) if title else self.UNKNOWN_TITLE
-            movie_type = MovieType.SHOW if show else MovieType.FILM
+            movie_type = MediaType.SHOW if show else MediaType.FILM
 
             movies.append(
                 Movie(

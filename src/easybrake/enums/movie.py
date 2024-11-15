@@ -1,6 +1,6 @@
 from enum import Enum, auto
 
 
-class MovieType(Enum):
+class MediaType(Enum):
     FILM = auto()
     SHOW = auto()
